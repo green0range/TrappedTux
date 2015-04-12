@@ -23,9 +23,10 @@ def setobj(x,y,width,height,img): # Draws the object to the screen, and stops co
                     # Find nearest side to push player out of
                     if (x - Globals.playerX) < (Globals.playerX - x + 64):
                         Globals.playerX = Globals.playerX + Globals.playerMoveSpeed
-                    else:
+                    elif (x - Globals.playerX) > (Globals.playerX - x + 64):
                         Globals.playerX = Globals.playerX - Globals.playerMoveSpeed
-                    if (y - Globals.playerY) < (Globals.playerY - y + 64):
-                        Globals.playerY = Globals.playerY + Globals.playerMoveSpeed
                     else:
-                        Globals.playerY = Globals.playerY - Globals.playerMoveSpeed                    
+                        if (y - Globals.playerY) < (Globals.playerY - y + 64):
+                            Globals.playerY = Globals.playerY + Globals.playerMoveSpeed
+                        elif (y - Globals.playerY) > (Globals.playerY - y + 64):
+                            Globals.playerY = Globals.playerY - Globals.playerMoveSpeed                    

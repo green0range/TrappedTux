@@ -35,7 +35,7 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-    # Updates the display
+    # Updates the display56-
     pygame.display.update()
     
     # Draw Background
@@ -50,7 +50,7 @@ while True:
         if Globals.levelnum == 1:
             Level1.playLevel()
         elif Globals.levelnum == 2:
-            Level2.playLevel()
+            Level1.playLevel()
             
     # Insert things to be drawn on top of the object setter
     Globals.screen.blit(playerImg,(Globals.playerX,Globals.playerY))

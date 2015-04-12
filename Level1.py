@@ -15,6 +15,25 @@ b0if = "ButtonOff.png"
 b1if = "ButtonOn.png"
 buttonOffImg = pygame.image.load(b0if).convert_alpha()
 buttonOnImg = pygame.image.load(b1if).convert_alpha()
+# Portal Image file
+pif = "Portal.png"
+portalImg = pygame.image.load(pif).convert_alpha()
+# Wires
+wlfif = "WireLR.png"
+wireLRImg = pygame.image.load(wlfif).convert_alpha()
+wudif = "WireUD.png"
+wireUDImg = pygame.image.load(wudif).convert_alpha()
+wluif = "WireLU.png"
+wireLUImg = pygame.image.load(wluif).convert_alpha()
+wdrif = "WireDR.png"
+wireDRImg = pygame.image.load(wdrif).convert_alpha()
+
+# door
+dcif = "Dooryclosed.png"
+doorClosedImg = pygame.image.load(dcif).convert_alpha()
+doif = "Dooryopen.png"
+doorOpenImg = pygame.image.load(doif).convert_alpha()
+
 
 buttontest = False
 
@@ -25,6 +44,18 @@ def restart():
     Level1.buttontest = False
 
 def playLevel():
+    
+    # Wires
+    ObjSetter.setNonSolidObj(40,485,50,50,wireLRImg)
+    ObjSetter.setNonSolidObj(90,485,50,50,wireLRImg)
+    ObjSetter.setNonSolidObj(140,485,50,50,wireLUImg)
+    ObjSetter.setNonSolidObj(140,435,50,50,wireUDImg)
+    ObjSetter.setNonSolidObj(140,385,50,50,wireUDImg)
+    ObjSetter.setNonSolidObj(140,335,50,50,wireUDImg)
+    ObjSetter.setNonSolidObj(140,285,50,50,wireDRImg)
+    ObjSetter.setNonSolidObj(190,285,50,50,wireLRImg)
+    ObjSetter.setNonSolidObj(240,285,50,50,wireLRImg)    
+
     # Create Walls
     ObjSetter.setobj(100,0,50,50,wallImg)
     ObjSetter.setobj(100,50,50,50,wallImg)
@@ -149,16 +180,23 @@ def playLevel():
     keys=pygame.key.get_pressed()
     import Level1
     if Level1.buttontest == False:
-        ObjSetter.setobj(250,225,50,50,wallImg) # I'll make a door graphic latter        
+        if ObjSetter.setNonSolidObj(250,200,50,100,doorClosedImg) == True:
+            restart()
         if ObjSetter.setNonSolidObj(25,500,20,20,buttonOffImg) == True:
             for event in pygame.event.get():
                 if event.type == KEYUP:
                     if keys[K_RETURN]:
                         Level1.buttontest = True
     else:
+        ObjSetter.setNonSolidObj(250,200,50,100,doorOpenImg)
         if ObjSetter.setNonSolidObj(25,500,20,20,buttonOnImg) == True:
             for event in pygame.event.get():
                 if event.type == KEYUP:
                     if keys[K_RETURN]:
                         Level1.buttontest = False    
+                        
+    # Portal
+    if ObjSetter.setNonSolidObj(900,50,50,50,portalImg) == True:
+        Globals.levelnum = 2
+        restart()
         
