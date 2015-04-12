@@ -38,9 +38,9 @@ while True:
     # Updates the display
     pygame.display.update()
     
-    # Insert objects to be drawn to the screen
+    # Draw Background
     Globals.screen.blit(backgroundImg,(0,0))
-    Globals.screen.blit(playerImg,(Globals.playerX,Globals.playerY))
+    
     
     # Controls the movement of the player
     Movement.checkMovement() 
@@ -51,3 +51,6 @@ while True:
             Level1.playLevel()
         elif Globals.levelnum == 2:
             Level2.playLevel()
+            
+    # Insert things to be drawn on top of the object setter
+    Globals.screen.blit(playerImg,(Globals.playerX,Globals.playerY))

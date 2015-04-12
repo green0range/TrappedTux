@@ -6,11 +6,11 @@ pygame.init()
 def checkcollisions(x,y): # Checks collisions with sides
     if x < 0:
         return 0
-    if x > Globals.screenwidth - 64:
+    if x > Globals.screenwidth - 45:
         return 1
     if y < 0:
         return 3
-    if y > Globals.screenheight - 64:
+    if y > Globals.screenheight - 45:
         return 4
 
 def checkMovement(): # Check keyboard input and moves the player accordingly 
