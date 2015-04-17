@@ -34,7 +34,6 @@ doorClosedImg = pygame.image.load(dcif).convert_alpha()
 doif = "Dooryopen.png"
 doorOpenImg = pygame.image.load(doif).convert_alpha()
 
-
 buttontest = False
 
 def restart():
@@ -43,18 +42,28 @@ def restart():
     import Level1
     Level1.buttontest = False
 
+wirex9,wirey9 = 2000,2000
+wirex10,wirey10 = 2000,2000
+
+nextwireid = 9
+
 def playLevel():
     
     # Wires
-    ObjSetter.setNonSolidObj(40,485,50,50,wireLRImg)
-    ObjSetter.setNonSolidObj(90,485,50,50,wireLRImg)
-    ObjSetter.setNonSolidObj(140,485,50,50,wireLUImg)
-    ObjSetter.setNonSolidObj(140,435,50,50,wireUDImg)
-    ObjSetter.setNonSolidObj(140,385,50,50,wireUDImg)
-    ObjSetter.setNonSolidObj(140,335,50,50,wireUDImg)
-    ObjSetter.setNonSolidObj(140,285,50,50,wireDRImg)
-    ObjSetter.setNonSolidObj(190,285,50,50,wireLRImg)
-    ObjSetter.setNonSolidObj(240,285,50,50,wireLRImg)    
+    import Level1
+    ObjSetter.setwire(40,485,wireLRImg,1)
+    ObjSetter.setwire(90,485,wireLRImg,2)
+    ObjSetter.setwire(140,485,wireLUImg,3)
+    ObjSetter.setwire(140,435,wireUDImg,4)
+    ObjSetter.setwire(140,385,wireUDImg,5)
+    ObjSetter.setwire(140,335,wireUDImg,6)
+    ObjSetter.setwire(140,285,wireDRImg,7)
+    ObjSetter.setwire(190,285,wireLRImg,8)
+    if not Level1.wirex9 == 2000: ObjSetter.setwire(Level1.wirex9,Level1.wirey9,wireLRImg,9)
+    if not Level1.wirex10 == 2000: ObjSetter.setwire(Level1.wirex10,Level1.wirey10,wireLRImg,10)
+    
+    
+    ObjSetter.setNonSolidObj(240,285,50,50,wireLRImg)  
 
     # Create Walls
     ObjSetter.setobj(100,0,50,50,wallImg)
@@ -186,17 +195,23 @@ def playLevel():
             for event in pygame.event.get():
                 if event.type == KEYUP:
                     if keys[K_RETURN]:
-                        Level1.buttontest = True
+                        if ObjSetter.testpath(25,500,240,285) == True:
+                            Level1.buttontest = True
     else:
         ObjSetter.setNonSolidObj(250,200,50,100,doorOpenImg)
         if ObjSetter.setNonSolidObj(25,500,20,20,buttonOnImg) == True:
             for event in pygame.event.get():
                 if event.type == KEYUP:
                     if keys[K_RETURN]:
-                        Level1.buttontest = False    
+                        if ObjSetter.testpath(25,500,240,285) == True:
+                            Level1.buttontest = False    
                         
     # Portal
     if ObjSetter.setNonSolidObj(900,50,50,50,portalImg) == True:
         Globals.levelnum = 2
         restart()
-        
+    
+    # Place wires
+    if keys[K_x]:
+        if Level1.nextwireid == 9: Level1.wirex9, Level1.wirey9 = int(50 * round(float(Globals.playerX)/50)),int(50 * round(float(Globals.playerY)/50))
+        Level1.nextwireid = Level1.nextwireid + 1

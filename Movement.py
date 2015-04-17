@@ -39,4 +39,4 @@ def checkMovement(): # Check keyboard input and moves the player accordingly
             Globals.playerY = Globals.playerY - Globals.playerMoveSpeed
         else:
             Globals.playerY = Globals.playerY + Globals.playerMoveSpeed  
-        Main.changeFaceDir("up")    
+        Main.changeFaceDir("up")
