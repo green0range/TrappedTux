@@ -2,7 +2,7 @@
 # Only run this script.
 
 # Setup pygame
-import pygame, sys, Globals, Movement, Level1
+import pygame, sys, Globals, Movement # Main imports
 from pygame.locals import *
 pygame.init()
 
@@ -15,6 +15,8 @@ backgroundImg = pygame.image.load(bif).convert_alpha()
 # Character Image File
 cif = "tuxTopViewLookingDown.png"
 playerImg = pygame.image.load(cif).convert_alpha()
+# Level imports
+import Level1, Level2 # and new levels here
 
 #Animation
 def changeFaceDir(direction):
@@ -35,7 +37,7 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-    # Updates the display56-
+    # Updates the display
     pygame.display.update()
     
     # Draw Background
@@ -50,7 +52,14 @@ while True:
         if Globals.levelnum == 1:
             Level1.playLevel()
         elif Globals.levelnum == 2:
-            Level1.playLevel()
+            Level2.playLevel()
             
+    # This will be drawn last    
     # Insert things to be drawn on top of the object setter
     Globals.screen.blit(playerImg,(Globals.playerX,Globals.playerY))
+    
+    # Draw variables on screen
+    black = (0,0,0)
+    Font = pygame.font.SysFont("Times New Roman", 12)
+    wireVarRender = Font.render(str(Globals.wires), 1, black)
+    Globals.screen.blit(wireVarRender, (0,0))

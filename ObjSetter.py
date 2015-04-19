@@ -67,7 +67,7 @@ wirey8 = 2000
 wirey9 = 2000
 wirey10 = 2000
 
-def setwire(x,y,img,idnum): # sets the wires in place, fill in varaibles needed for pathfinding
+def setwire(x,y,img,idnum): # sets the wires in place, fills in varaibles needed for pathfinding
     keys=pygame.key.get_pressed()
     import ObjSetter
     if idnum == 1:
@@ -77,7 +77,8 @@ def setwire(x,y,img,idnum): # sets the wires in place, fill in varaibles needed 
             if ObjSetter.setNonSolidObj(x,y,50,50,img) == True and keys[K_z]:
                 ObjSetter.wire1 = 0
                 ObjSetter.wirex1 = 2000
-                ObjSetter.wirey1 = 2000             
+                ObjSetter.wirey1 = 2000  
+                Globals.wires +=1
                 
     if idnum == 2:
         if ObjSetter.wire2 == 1:
@@ -86,7 +87,8 @@ def setwire(x,y,img,idnum): # sets the wires in place, fill in varaibles needed 
             if ObjSetter.setNonSolidObj(x,y,50,50,img) == True and keys[K_z]:
                 ObjSetter.wire2 = 0  
                 ObjSetter.wirex2 = 2000
-                ObjSetter.wirey2 = 2000                
+                ObjSetter.wirey2 = 2000   
+                Globals.wires +=1
                             
     if idnum == 3:
         if ObjSetter.wire3 == 1:
@@ -95,7 +97,8 @@ def setwire(x,y,img,idnum): # sets the wires in place, fill in varaibles needed 
             if ObjSetter.setNonSolidObj(x,y,50,50,img) == True and keys[K_z]:
                 ObjSetter.wire3 = 0    
                 ObjSetter.wirex3 = 2000
-                ObjSetter.wirey3 = 2000                
+                ObjSetter.wirey3 = 2000   
+                Globals.wires +=1
                                         
     if idnum == 4:
         if ObjSetter.wire4 == 1:
@@ -104,7 +107,8 @@ def setwire(x,y,img,idnum): # sets the wires in place, fill in varaibles needed 
             if ObjSetter.setNonSolidObj(x,y,50,50,img) == True and keys[K_z]:
                 ObjSetter.wire4 = 0     
                 ObjSetter.wirex4 = 2000
-                ObjSetter.wirey4 = 2000                
+                ObjSetter.wirey4 = 2000 
+                Globals.wires +=1
                                                     
     if idnum == 5:
         if ObjSetter.wire5 == 1:
@@ -113,7 +117,8 @@ def setwire(x,y,img,idnum): # sets the wires in place, fill in varaibles needed 
             if ObjSetter.setNonSolidObj(x,y,50,50,img) == True and keys[K_z]:
                 ObjSetter.wire5 = 0     
                 ObjSetter.wirex5 = 2000
-                ObjSetter.wirey5 = 2000                
+                ObjSetter.wirey5 = 2000   
+                Globals.wires +=1
                 
     if idnum == 6:
         if ObjSetter.wire6 == 1:
@@ -122,7 +127,8 @@ def setwire(x,y,img,idnum): # sets the wires in place, fill in varaibles needed 
             if ObjSetter.setNonSolidObj(x,y,50,50,img) == True and keys[K_z]:
                 ObjSetter.wire6 = 0
                 ObjSetter.wirex6 = 2000
-                ObjSetter.wirey6 = 2000                
+                ObjSetter.wirey6 = 2000  
+                Globals.wires +=1
                 
     if idnum == 7:
         if ObjSetter.wire7 == 1:
@@ -131,7 +137,8 @@ def setwire(x,y,img,idnum): # sets the wires in place, fill in varaibles needed 
             if ObjSetter.setNonSolidObj(x,y,50,50,img) == True and keys[K_z]:
                 ObjSetter.wire7 = 0  
                 ObjSetter.wirex7 = 2000
-                ObjSetter.wirey7 = 2000                
+                ObjSetter.wirey7 = 2000  
+                Globals.wires +=1
                             
     if idnum == 8:
         if ObjSetter.wire8 == 1:
@@ -140,7 +147,8 @@ def setwire(x,y,img,idnum): # sets the wires in place, fill in varaibles needed 
             if ObjSetter.setNonSolidObj(x,y,50,50,img) == True and keys[K_z]:
                 ObjSetter.wire8 = 0  
                 ObjSetter.wirex8 = 2000
-                ObjSetter.wirey8 = 2000                
+                ObjSetter.wirey8 = 2000       
+                Globals.wires +=1
                                         
     if idnum == 9:
         if ObjSetter.wire9 == 1:
@@ -149,7 +157,8 @@ def setwire(x,y,img,idnum): # sets the wires in place, fill in varaibles needed 
             if ObjSetter.setNonSolidObj(x,y,50,50,img) == True and keys[K_z]:
                 ObjSetter.wire9 = 0   
                 ObjSetter.wirex9 = 2000
-                ObjSetter.wirey9 = 2000                
+                ObjSetter.wirey9 = 2000      
+                Globals.wires +=1
                                                     
     if idnum == 10:
         if ObjSetter.wire10 == 1:
@@ -158,7 +167,8 @@ def setwire(x,y,img,idnum): # sets the wires in place, fill in varaibles needed 
             if ObjSetter.setNonSolidObj(x,y,50,50,img) == True and keys[K_z]:
                 ObjSetter.wire10 = 0
                 ObjSetter.wirex10 = 2000
-                ObjSetter.wirey10 = 2000                
+                ObjSetter.wirey10 = 2000   
+                Globals.wires +=1
                 
 def testpath(startx,starty,endx,endy): # tests if an electrical path is complete
     for i in range (0,101):
@@ -197,3 +207,39 @@ def testpath(startx,starty,endx,endy): # tests if an electrical path is complete
                                 startx,starty = x,y                                
                         else:
                             startx,starty = x,y     
+                            
+                            
+def resetwires():
+    import ObjSetter
+    ObjSetter.wire1 = 1
+    ObjSetter.wire2 = 1
+    ObjSetter.wire3 = 1
+    ObjSetter.wire4 = 1
+    ObjSetter.wire5 = 1
+    ObjSetter.wire6 = 1
+    ObjSetter.wire7 = 1
+    ObjSetter.wire8 = 1
+    ObjSetter.wire9 = 1
+    ObjSetter.wire10 = 1
+    
+    ObjSetter.wirex1 = 2000
+    ObjSetter.wirex2 = 2000
+    ObjSetter.wirex3 = 2000
+    ObjSetter.wirex4 = 2000
+    ObjSetter.wirex5 = 2000
+    ObjSetter.wirex6 = 2000
+    ObjSetter.wirex7 = 2000
+    ObjSetter.wirex8 = 2000
+    ObjSetter.wirex9 = 2000
+    ObjSetter.wirex10 = 2000
+    
+    ObjSetter.wirey1 = 2000
+    ObjSetter.wirey2 = 2000
+    ObjSetter.wirey3 = 2000
+    ObjSetter.wirey4 = 2000
+    ObjSetter.wirey5 = 2000
+    ObjSetter.wirey6 = 2000
+    ObjSetter.wirey7 = 2000
+    ObjSetter.wirey8 = 2000
+    ObjSetter.wirey9 = 2000
+    ObjSetter.wirey10 = 2000    

@@ -34,36 +34,46 @@ doorClosedImg = pygame.image.load(dcif).convert_alpha()
 doif = "Dooryopen.png"
 doorOpenImg = pygame.image.load(doif).convert_alpha()
 
-buttontest = False
+buttontest = False  
+
+wirex8,wirey8 = 2000,2000
+wirex9,wirey9 = 2000,2000
+wirex10,wirey10 = 2000,2000
+
+nextwireid = 8
 
 def restart():
     Globals.playerX = 32
     Globals.playerY = 32    
     import Level1
     Level1.buttontest = False
-
-wirex9,wirey9 = 2000,2000
-wirex10,wirey10 = 2000,2000
-
-nextwireid = 9
+    ObjSetter.resetwires()
+    Level1.nextwireid = 8
+    Level1.wirex8,Level1.wirey8 = 2000,2000
+    Level1.wirex9,Level1.wirey9 = 2000,2000
+    Level1.wirex10,Level1.wirey10 = 2000,2000  
+    Globals.wires = 0
 
 def playLevel():
     
     # Wires
-    import Level1
-    ObjSetter.setwire(40,485,wireLRImg,1)
-    ObjSetter.setwire(90,485,wireLRImg,2)
-    ObjSetter.setwire(140,485,wireLUImg,3)
-    ObjSetter.setwire(140,435,wireUDImg,4)
-    ObjSetter.setwire(140,385,wireUDImg,5)
-    ObjSetter.setwire(140,335,wireUDImg,6)
-    ObjSetter.setwire(140,285,wireDRImg,7)
-    ObjSetter.setwire(190,285,wireLRImg,8)
+    import Level1    
+    ObjSetter.setwire(50,500,wireLRImg,1)
+    ObjSetter.setwire(100,500,wireLRImg,2)
+    ObjSetter.setwire(150,500,wireLUImg,3)
+    ObjSetter.setwire(150,450,wireUDImg,4)
+    ObjSetter.setwire(150,400,wireUDImg,5)
+    ObjSetter.setwire(150,350,wireUDImg,6)
+    ObjSetter.setwire(150,300,wireDRImg,7)   
+    if not Level1.wirex8 == 2000: ObjSetter.setwire(Level1.wirex8,Level1.wirey8,wireLRImg,8)
     if not Level1.wirex9 == 2000: ObjSetter.setwire(Level1.wirex9,Level1.wirey9,wireLRImg,9)
     if not Level1.wirex10 == 2000: ObjSetter.setwire(Level1.wirex10,Level1.wirey10,wireLRImg,10)
     
+    keys=pygame.key.get_pressed()
     
-    ObjSetter.setNonSolidObj(240,285,50,50,wireLRImg)  
+    if ObjSetter.setNonSolidObj(200,300,50,50,wireLRImg):
+        if keys[K_z]:
+            print("End wire, cannot be moved")
 
     # Create Walls
     ObjSetter.setobj(100,0,50,50,wallImg)
@@ -131,7 +141,6 @@ def playLevel():
     ObjSetter.setobj(850,400,50,50,wallImg)
     
     ObjSetter.setobj(500,0,50,50,wallImg)
-    # To think I wrote all that and got it off by 50px on the x axis. URRGGEEE
     
     # Set Traps
     if ObjSetter.setNonSolidObj(150,0,50,50,SpikesImg) == True:
@@ -186,24 +195,23 @@ def playLevel():
         restart()           
         
     # Door
-    keys=pygame.key.get_pressed()
     import Level1
     if Level1.buttontest == False:
         if ObjSetter.setNonSolidObj(250,200,50,100,doorClosedImg) == True:
             restart()
-        if ObjSetter.setNonSolidObj(25,500,20,20,buttonOffImg) == True:
+        if ObjSetter.setNonSolidObj(35,515,20,20,buttonOffImg) == True:
             for event in pygame.event.get():
                 if event.type == KEYUP:
                     if keys[K_RETURN]:
-                        if ObjSetter.testpath(25,500,240,285) == True:
+                        if ObjSetter.testpath(25,500,200,300) == True:
                             Level1.buttontest = True
     else:
         ObjSetter.setNonSolidObj(250,200,50,100,doorOpenImg)
-        if ObjSetter.setNonSolidObj(25,500,20,20,buttonOnImg) == True:
+        if ObjSetter.setNonSolidObj(35,515,20,20,buttonOnImg) == True:
             for event in pygame.event.get():
                 if event.type == KEYUP:
                     if keys[K_RETURN]:
-                        if ObjSetter.testpath(25,500,240,285) == True:
+                        if ObjSetter.testpath(25,500,200,300) == True:
                             Level1.buttontest = False    
                         
     # Portal
@@ -212,6 +220,20 @@ def playLevel():
         restart()
     
     # Place wires
-    if keys[K_x]:
-        if Level1.nextwireid == 9: Level1.wirex9, Level1.wirey9 = int(50 * round(float(Globals.playerX)/50)),int(50 * round(float(Globals.playerY)/50))
-        Level1.nextwireid = Level1.nextwireid + 1
+    if Globals.wires > 0:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()       
+            if event.type == KEYUP:
+                if keys[K_x]:
+                    if Level1.nextwireid == 8:
+                        Level1.wirex8, Level1.wirey8 = int(50 * round(float(Globals.playerX)/50)),int(50 * round(float(Globals.playerY)/50))
+                        Globals.wires = Globals.wires - 1
+                    if Level1.nextwireid == 9:
+                        Level1.wirex9, Level1.wirey9 = int(50 * round(float(Globals.playerX)/50)),int(50 * round(float(Globals.playerY)/50))
+                        Globals.wires = Globals.wires - 1
+                    if Level1.nextwireid == 10:
+                        Level1.wirex10, Level1.wirey10 = int(50 * round(float(Globals.playerX)/50)),int(50 * round(float(Globals.playerY)/50))
+                        Globals.wires = Globals.wires - 1
+                    Level1.nextwireid = Level1.nextwireid + 1
