@@ -10,10 +10,10 @@ gamestarted = True
 
 # Resource setup
 # Background Image File
-bif = "background.png"
+bif = Globals.get_asset_name("background.png")
 backgroundImg = pygame.image.load(bif).convert_alpha()
 # Character Image File
-cif = "tuxTopViewLookingDown.png"
+cif = Globals.get_asset_name("tuxTopViewLookingDown.png")
 playerImg = pygame.image.load(cif).convert_alpha()
 # Level imports
 import Level1, Level2 # and new levels here
@@ -21,13 +21,13 @@ import Level1, Level2 # and new levels here
 #Animation
 def changeFaceDir(direction):
     if direction == "up":
-        cif = "tuxTopViewLookingUp.png"
+        cif = Globals.get_asset_name("tuxTopViewLookingUp.png")
     if direction == "down":
-        cif = "tuxTopViewLookingDown.png"   
+        cif = Globals.get_asset_name("tuxTopViewLookingDown.png")   
     if direction == "right":
-        cif = "tuxTopViewLookingRight.png"
+        cif = Globals.get_asset_name("tuxTopViewLookingRight.png")
     if direction == "left":
-        cif = "tuxTopViewLookingLeft.png"
+        cif = Globals.get_asset_name("tuxTopViewLookingLeft.png")
     playerImg = pygame.image.load(cif).convert_alpha()
 
 
@@ -40,9 +40,7 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-    # Updates the display
-    pygame.display.update()
-    
+                
     # Draw Background
     Globals.screen.blit(backgroundImg,(0,0))
     
@@ -66,3 +64,7 @@ while True:
 
     wireVarRender = Font.render(str(Globals.wires), 1, black)
     Globals.screen.blit(wireVarRender, (0,0))
+
+    # Updates the display
+    pygame.display.flip()
+    
