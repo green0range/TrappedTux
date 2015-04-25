@@ -5,33 +5,33 @@ pygame.init()
 
 # Get Images
 # Wall Image File
-wif = "IceBrickWall.png"
+wif = Globals.get_asset_name("IceBrickWall.png")
 wallImg = pygame.image.load(wif).convert_alpha()
 # Spikes Image File
-sif = "Spikes.png"
+sif = Globals.get_asset_name("Spikes.png")
 SpikesImg = pygame.image.load(sif).convert_alpha()
 # Button Off/On Image Files
-b0if = "ButtonOff.png"
-b1if = "ButtonOn.png"
+b0if = Globals.get_asset_name("ButtonOff.png")
+b1if = Globals.get_asset_name("ButtonOn.png")
 buttonOffImg = pygame.image.load(b0if).convert_alpha()
 buttonOnImg = pygame.image.load(b1if).convert_alpha()
 # Portal Image file
-pif = "Portal.png"
+pif = Globals.get_asset_name("Portal.png")
 portalImg = pygame.image.load(pif).convert_alpha()
 # Wires
-wlfif = "WireLR.png"
+wlfif = Globals.get_asset_name("WireLR.png")
 wireLRImg = pygame.image.load(wlfif).convert_alpha()
-wudif = "WireUD.png"
+wudif = Globals.get_asset_name("WireUD.png")
 wireUDImg = pygame.image.load(wudif).convert_alpha()
-wluif = "WireLU.png"
+wluif = Globals.get_asset_name("WireLU.png")
 wireLUImg = pygame.image.load(wluif).convert_alpha()
-wdrif = "WireDR.png"
+wdrif = Globals.get_asset_name("WireDR.png")
 wireDRImg = pygame.image.load(wdrif).convert_alpha()
 
 # door
-dcif = "Dooryclosed.png"
+dcif = Globals.get_asset_name("Dooryclosed.png")
 doorClosedImg = pygame.image.load(dcif).convert_alpha()
-doif = "Dooryopen.png"
+doif = Globals.get_asset_name("Dooryopen.png")
 doorOpenImg = pygame.image.load(doif).convert_alpha()
 
 button1 = False
