@@ -29,7 +29,10 @@ def changeFaceDir(direction):
     if direction == "left":
         cif = "tuxTopViewLookingLeft.png"
     playerImg = pygame.image.load(cif).convert_alpha()
-        
+
+
+Font = pygame.font.SysFont("Times New Roman", 12)
+
 # Main loop
 while True:
     # Closes game when X button pressed
@@ -60,6 +63,6 @@ while True:
     
     # Draw variables on screen
     black = (0,0,0)
-    Font = pygame.font.SysFont("Times New Roman", 12)
+
     wireVarRender = Font.render(str(Globals.wires), 1, black)
     Globals.screen.blit(wireVarRender, (0,0))
