@@ -22,13 +22,13 @@ def setobj(x,y,width,height,img): # Draws the object to the screen, and stops co
                     # Player is inside the object
                     # Find nearest side to push player out of
                     if (x - Globals.playerX) < (Globals.playerX - x + 64):
-                        Globals.playerX = Globals.playerX + Globals.playerMoveSpeed
+                        Globals.playerX = Globals.playerX + Globals.playerMoveSpeed + 1
                     else:
-                        Globals.playerX = Globals.playerX - Globals.playerMoveSpeed
+                        Globals.playerX = Globals.playerX - Globals.playerMoveSpeed - 1
                     if (y - Globals.playerY) < (Globals.playerY - y + 64):
-                        Globals.playerY = Globals.playerY + Globals.playerMoveSpeed
+                        Globals.playerY = Globals.playerY + Globals.playerMoveSpeed + 1
                     else:
-                        Globals.playerY = Globals.playerY - Globals.playerMoveSpeed                    
+                        Globals.playerY = Globals.playerY - Globals.playerMoveSpeed - 1                  
                         
 # Wire system, very messy. If anyone knows a better way to do this please do it.
 # There is currently a limit of 10 wires per level

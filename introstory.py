@@ -10,6 +10,8 @@ introback2Img = pygame.image.load(i2if).convert_alpha()
 
 stage = 1
 
+keydelay = 0 # Delay between registering enter key presses, stops sensing 1 long press as 2 presses
+
 def playintro():
     import introstory
     keys=pygame.key.get_pressed()
@@ -41,7 +43,10 @@ def playintro():
         import Main
         Main.gamestarted = True
         
-    for event in pygame.event.get():
-        if event.type == KEYUP:    
-            if keys[K_RETURN]:
-                introstory.stage +=1
+    if introstory.keydelay <= 0:
+        if keys[K_RETURN]:
+            introstory.stage +=1
+            introstory.keydelay = 120 # 2s on 60fps
+            
+    if not introstory.keydelay <=0:
+        introstory.keydelay = keydelay - 1

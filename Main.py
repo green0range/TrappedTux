@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 # The Main script handles window creation, menus, level numbers and which other scripts and run.
 # Only run this script.
 
@@ -5,6 +7,7 @@
 import pygame, sys, Globals, Movement # Main imports
 from pygame.locals import *
 pygame.init()
+pygame.display.set_caption("Trapped Tux")
 
 gamestarted = False
 
@@ -30,9 +33,15 @@ def changeFaceDir(direction):
         cif = Globals.get_asset_name("tuxTopViewLookingLeft.png")
     playerImg = pygame.image.load(cif).convert_alpha()
 
+# Display font
 black = (0,0,0)
 Font = pygame.font.SysFont("Times New Roman", 12)
 wireVarRender = Font.render(str(Globals.wires), 1, black)
+
+# Frame limiter
+frameLimit = 60 # Set this to the refresh rate of your monitor
+Globals.playerMoveSpeed = (frameLimit / (frameLimit * 0.1)) * 0.2
+clock = pygame.time.Clock()
 
 # Main loop
 while True:
@@ -55,20 +64,22 @@ while True:
         # Draw Background
         Globals.screen.blit(backgroundImg,(0,0))
         # Controls the movement of the player
-        Movement.checkMovement()  
-        
-        # This will be drawn last    
-        # Insert things to be drawn on top of the object setter
-        Globals.screen.blit(playerImg,(Globals.playerX,Globals.playerY))
-        Globals.screen.blit(wireVarRender, (0,0))        
+        Movement.checkMovement()        
         
         if Globals.levelnum == 1:
             Level1.playLevel()
         elif Globals.levelnum == 2:
             Level2.playLevel()
+            
+        # This will be drawn last    
+        # Insert things to be drawn on top of the object setter
+        Globals.screen.blit(playerImg,(Globals.playerX,Globals.playerY))
+        Globals.screen.blit(wireVarRender, (0,0))          
     else:
         introstory.playintro()
 
     # Updates the display
     pygame.display.flip()
+    
+    clock.tick(frameLimit)
     
