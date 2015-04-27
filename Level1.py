@@ -200,19 +200,19 @@ def playLevel():
         if ObjSetter.setNonSolidObj(250,200,50,100,doorClosedImg) == True:
             restart()
         if ObjSetter.setNonSolidObj(35,515,20,20,buttonOffImg) == True:
-            for event in pygame.event.get():
-                if event.type == KEYUP:
-                    if keys[K_RETURN]:
-                        if ObjSetter.testpath(25,500,200,300) == True:
-                            Level1.buttontest = True
+            if Globals.keydelay <= 0:
+                if keys[K_RETURN]:
+                    if ObjSetter.testpath(25,500,200,300) == True:
+                        Level1.buttontest = True
+                        Globals.keydelay = 60
     else:
         ObjSetter.setNonSolidObj(250,200,50,100,doorOpenImg)
         if ObjSetter.setNonSolidObj(35,515,20,20,buttonOnImg) == True:
-            for event in pygame.event.get():
-                if event.type == KEYUP:
-                    if keys[K_RETURN]:
-                        if ObjSetter.testpath(25,500,200,300) == True:
-                            Level1.buttontest = False    
+            if Globals.keydelay <= 0:
+                if keys[K_RETURN]:
+                    if ObjSetter.testpath(25,500,200,300) == True:
+                        Level1.buttontest = False 
+                        Globals.keydelay = 60
                         
     # Portal
     if ObjSetter.setNonSolidObj(900,50,50,50,portalImg) == True:
@@ -221,11 +221,7 @@ def playLevel():
     
     # Place wires
     if Globals.wires > 0:
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()       
-            if event.type == KEYUP:
+        if Globals.keydelay <= 0:
                 if keys[K_x]:
                     if Level1.nextwireid == 8:
                         Level1.wirex8, Level1.wirey8 = int(50 * round(float(Globals.playerX)/50)),int(50 * round(float(Globals.playerY)/50))
@@ -237,3 +233,4 @@ def playLevel():
                         Level1.wirex10, Level1.wirey10 = int(50 * round(float(Globals.playerX)/50)),int(50 * round(float(Globals.playerY)/50))
                         Globals.wires = Globals.wires - 1
                     Level1.nextwireid = Level1.nextwireid + 1
+                    Globals.keydelay = 60

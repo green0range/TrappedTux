@@ -196,47 +196,43 @@ def playLevel():
         if ObjSetter.setNonSolidObj(350,150,50,100,doorClosedImg) == True:
             restart()
         if ObjSetter.setNonSolidObj(230,265,20,20,buttonOffImg) == True:
-            for event in pygame.event.get():
-                if event.type == KEYUP:
+            if Globals.keydelay <= 0:
                     if keys[K_RETURN]:
                         if ObjSetter.testpath(230,265,300,250) == True:
                             Level2.button1 = True
+                            Globals.keydelay = 60
     else:
         ObjSetter.setNonSolidObj(350,150,50,100,doorOpenImg)
         if ObjSetter.setNonSolidObj(230,265,20,20,buttonOnImg) == True:
-            for event in pygame.event.get():
-                if event.type == KEYUP:
+            if Globals.keydelay <= 0:
                     if keys[K_RETURN]:
                         if ObjSetter.testpath(230,265,300,250) == True:
                             Level2.button1 = False      
+                            Globals.keydelay = 60
     # 2nd door                       
     import Level2
     if Level2.button2 == False:
         if ObjSetter.setNonSolidObj(700,350,50,100,doorClosedImg) == True:
             restart()
         if ObjSetter.setNonSolidObj(3*230-100,265+50,20,20,buttonOffImg) == True:
-            for event in pygame.event.get():
-                if event.type == KEYUP:
+            if Globals.keydelay <= 0:
                     if keys[K_RETURN]:
                         if ObjSetter.testpath(3*230-100,265+50,650,300) == True:
                             Level2.button2 = True
+                            Globals.keydelay = 60
     else:
         ObjSetter.setNonSolidObj(700,350,50,100,doorOpenImg)
         if ObjSetter.setNonSolidObj(3*230-100,265+50,20,20,buttonOnImg) == True:
-            for event in pygame.event.get():
-                if event.type == KEYUP:
+            if Globals.keydelay <= 0:
                     if keys[K_RETURN]:
                         if ObjSetter.testpath(3*230-100,265+50,650,300) == True:
-                            Level2.button2 = False        
+                            Level2.button2 = False 
+                            Globals.keydelay = 60
     
     
     # Place wires
     if Globals.wires > 0:
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()       
-            if event.type == KEYUP:
+        if Globals.keydelay <= 0:
                 if keys[K_x]:
                     if Level2.nextwireid == 3:
                         Level2.wirex3, Level2.wirey3 = int(50 * round(float(Globals.playerX)/50)),int(50 * round(float(Globals.playerY)/50))
@@ -263,3 +259,4 @@ def playLevel():
                         Level2.wirex10, Level2.wirey10 = int(50 * round(float(Globals.playerX)/50)),int(50 * round(float(Globals.playerY)/50))
                         Globals.wires = Globals.wires - 1
                     Level2.nextwireid = Level2.nextwireid + 1    
+                    Globals.keydelay = 60

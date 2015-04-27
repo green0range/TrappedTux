@@ -61,11 +61,12 @@ while True:
     # Controls which level is called
     if gamestarted == True:
 
-        # Draw Background
+        # Draw Backgrounds/beneath ObjSetter
         Globals.screen.blit(backgroundImg,(0,0))
         # Controls the movement of the player
         Movement.checkMovement()        
         
+        # ObjSetter draws in this black
         if Globals.levelnum == 1:
             Level1.playLevel()
         elif Globals.levelnum == 2:
@@ -77,6 +78,9 @@ while True:
         Globals.screen.blit(wireVarRender, (0,0))          
     else:
         introstory.playintro()
+        
+    if not Globals.keydelay <=0:
+        Globals.keydelay -=1    
 
     # Updates the display
     pygame.display.flip()
