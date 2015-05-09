@@ -3,13 +3,14 @@ import pygame, sys, Globals
 from pygame.locals import *
 pygame.init()
 
-def setNonSolidObj(x,y,width,height,img):
+def setNonSolidObj(x,y,width,height,img): # Draws the object to the screen, and stops collisions (i.e: walls)
     Globals.screen.blit(img, (x,y))
+    # Checks each boundary
     if x <= Globals.playerX + 45: # Right of RW
         if x + width >= Globals.playerX: # Left of LW
             if y <= Globals.playerY + 45: # Below TW
-                if y + height >= Globals.playerY: # Above BW
-                    return True # Tells caller player is inside obj (i.e: spikes, finish marker)
+                if y + height >= Globals.playerY:
+                    return True
 
 def setobj(x,y,width,height,img): # Draws the object to the screen, and stops collisions (i.e: walls)
     Globals.screen.blit(img, (x,y))
@@ -28,8 +29,8 @@ def setobj(x,y,width,height,img): # Draws the object to the screen, and stops co
                     if (y - Globals.playerY) < (Globals.playerY - y + 64):
                         Globals.playerY = Globals.playerY + Globals.playerMoveSpeed + 1
                     else:
-                        Globals.playerY = Globals.playerY - Globals.playerMoveSpeed - 1                  
-                        
+                        Globals.playerY = Globals.playerY - Globals.playerMoveSpeed - 1
+
 # Wire system, very messy. If anyone knows a better way to do this please do it.
 # There is currently a limit of 10 wires per level
 # This can be increased by increasing the variables and copy/pasting the code handling them
@@ -242,4 +243,38 @@ def resetwires():
     ObjSetter.wirey7 = 2000
     ObjSetter.wirey8 = 2000
     ObjSetter.wirey9 = 2000
-    ObjSetter.wirey10 = 2000    
+    ObjSetter.wirey10 = 2000
+
+moveCount = 0
+tmpstorexdist = 0
+tmpstoreydist = 0
+def setMoveObj(startx, starty, endx, endy, steps, loop,img,repeat):
+    import ObjSetter
+    if repeat:
+        xdist = ObjSetter.tmpstorexdist
+        ydist = ObjSetter.tmpstoreydist
+    else:
+        if endx > startx:
+            xdist = endx - startx
+        else:
+            xdist = startx - endx
+        if endy > starty:
+            ydist = endy - starty
+        else:
+            ydist = starty - endy
+    movex = xdist / steps
+    movey = ydist / steps
+    if ObjSetter.moveCount <= steps:
+        ObjSetter.moveCount += 1
+        if ObjSetter.setNonSolidObj(startx + (movex*ObjSetter.moveCount),starty + (movey*ObjSetter.moveCount),50,50,img):\
+             return True
+    else:
+        if loop:
+            ObjSetter.tmpstorexdist = xdist
+            ObjSetter.tmpstoreydist = ydist
+            ObjSetter.moveRelay(endx,endy,startx,starty,steps,loop,img)
+
+def moveRelay(startx, starty, endx, endy, steps, loop,img):
+    import ObjSetter
+    ObjSetter.moveCount = 0
+    ObjSetter.setMoveObj(startx, starty, endx, endy, steps, loop,img,True)

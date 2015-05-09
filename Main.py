@@ -19,24 +19,24 @@ backgroundImg = pygame.image.load(bif).convert_alpha()
 cif = Globals.get_asset_name("tuxTopViewLookingDown.png")
 playerImg = pygame.image.load(cif).convert_alpha()
 # Level imports
-import introstory, Level1, Level2 # and new levels here
+import introstory, Level1, Level2, Level3  # and new levels here
 
-#Animation
+# Animation
 def changeFaceDir(direction):
+    import Main
     if direction == "up":
-        cif = Globals.get_asset_name("tuxTopViewLookingUp.png")
+        Main.cif = Globals.get_asset_name("tuxTopViewLookingUp.png")
     if direction == "down":
-        cif = Globals.get_asset_name("tuxTopViewLookingDown.png")   
+        Main.cif = Globals.get_asset_name("tuxTopViewLookingDown.png")
     if direction == "right":
-        cif = Globals.get_asset_name("tuxTopViewLookingRight.png")
+        Main.cif = Globals.get_asset_name("tuxTopViewLookingRight.png")
     if direction == "left":
-        cif = Globals.get_asset_name("tuxTopViewLookingLeft.png")
-    playerImg = pygame.image.load(cif).convert_alpha()
+        Main.cif = Globals.get_asset_name("tuxTopViewLookingLeft.png")
+    Main.playerImg = pygame.image.load(cif).convert_alpha()
 
 # Display font
 black = (0,0,0)
 Font = pygame.font.SysFont("Times New Roman", 12)
-wireVarRender = Font.render(str(Globals.wires), 1, black)
 
 # Frame limiter
 frameLimit = 60 # Set this to the refresh rate of your monitor
@@ -53,34 +53,39 @@ while True:
                 
     # Draw Background
     Globals.screen.blit(backgroundImg,(0,0))
-    
-    
+
     # Controls the movement of the player
     Movement.checkMovement() 
     
     # Controls which level is called
-    if gamestarted == True:
+    if gamestarted:
 
         # Draw Backgrounds/beneath ObjSetter
         Globals.screen.blit(backgroundImg,(0,0))
         # Controls the movement of the player
         Movement.checkMovement()        
         
-        # ObjSetter draws in this black
+        # ObjSetter draws in this
         if Globals.levelnum == 1:
             Level1.playLevel()
         elif Globals.levelnum == 2:
             Level2.playLevel()
+        elif Globals.levelnum == 3:
+            Level3.playLevel()
             
         # This will be drawn last    
         # Insert things to be drawn on top of the object setter
         Globals.screen.blit(playerImg,(Globals.playerX,Globals.playerY))
-        Globals.screen.blit(wireVarRender, (0,0))          
+        wireVarRender = Font.render(str(Globals.wires), 1, black)
+        Globals.screen.blit(wireVarRender, (0, 0))
     else:
         introstory.playintro()
+
+    import ObjSetter
+    #ObjSetter.setMoveObj(0,0,900,500,100,True,playerImg,False)
         
-    if not Globals.keydelay <=0:
-        Globals.keydelay -=1    
+    if not Globals.keydelay <= 0:
+        Globals.keydelay -= 1
 
     # Updates the display
     pygame.display.flip()

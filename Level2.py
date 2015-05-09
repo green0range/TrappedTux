@@ -260,3 +260,8 @@ def playLevel():
                         Globals.wires = Globals.wires - 1
                     Level2.nextwireid = Level2.nextwireid + 1    
                     Globals.keydelay = 60
+
+    # Portal
+    if ObjSetter.setNonSolidObj(900,50,50,50,portalImg) == True:
+        Globals.levelnum = 3
+        restart()
